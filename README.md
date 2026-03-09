@@ -35,7 +35,7 @@ This is a personal developer portfolio for Puneeth Raj — a Computer Science st
 - Animated particle network background
 - Custom cursor (pointer devices)
 - Fully responsive — mobile, tablet, desktop
-- GitHub Pages static export ready
+- Vercel deployment ready (zero config)
 
 ---
 
@@ -65,15 +65,17 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 npm run build
 ```
 
-Outputs a static site to the `/out` directory.
+Vercel runs this automatically on every push — no manual build step needed.
 
 ---
 
 ## Deployment
 
-### GitHub Pages
+### Vercel (Recommended)
 
-1. Push your code to GitHub:
+Vercel automatically detects Next.js and deploys with zero configuration.
+
+**Step 1 — Push to GitHub:**
 
 ```bash
 git init
@@ -84,17 +86,17 @@ git remote add origin https://github.com/pun33th45/portfolio.git
 git push -u origin main
 ```
 
-2. Deploy to the `gh-pages` branch:
+**Step 2 — Deploy on Vercel:**
 
-```bash
-npm run deploy
-```
+1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
+2. Click **Add New Project**
+3. Import your `portfolio` repository
+4. Vercel auto-detects Next.js — no settings to change
+5. Click **Deploy**
 
-This automatically runs `npm run build` first, then pushes the `/out` folder to the `gh-pages` branch.
+Your site will be live at: `https://pun33th45-portfolio.vercel.app` (or a custom domain)
 
-3. In your GitHub repository → **Settings** → **Pages** → set source branch to `gh-pages`.
-
-Your site will be live at: `https://pun33th45.github.io/portfolio`
+Every future `git push` to `main` triggers an automatic redeploy.
 
 ---
 

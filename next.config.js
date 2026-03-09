@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-  trailingSlash: true,
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      { protocol: "https", hostname: "github-readme-stats.vercel.app" },
+      { protocol: "https", hostname: "avatars.githubusercontent.com" },
+    ],
   },
 }
 
