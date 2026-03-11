@@ -157,15 +157,16 @@ export default function Hero() {
               className="mb-6"
             >
               <div className="text-white/30 font-mono text-sm mb-3 tracking-widest">&lt; AI Engineer /&gt;</div>
-              <h1 className="font-display font-black leading-[0.9] tracking-tight">
+              <h1 className="font-display font-black leading-none tracking-tight">
                 <span className="block text-white" style={{ fontSize: "clamp(3.5rem,8vw,7rem)" }}>Puneeth</span>
                 <span
-                  className="block"
+                  className="block pb-2"
                   style={{
                     fontSize: "clamp(3.5rem,8vw,7rem)",
                     background: "linear-gradient(135deg, #06B6D4, #3B82F6, #8B5CF6)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
                     filter: "drop-shadow(0 0 24px rgba(6,182,212,0.3))",
                   }}
                 >
