@@ -241,7 +241,7 @@ export default function Hero() {
               transition={{ delay: 0.75 }}
               className="flex gap-8 mb-8"
             >
-              {[["16+", "Projects"], ["15+", "Technologies"], ["2025", "Intern"]].map(([v, l]) => (
+              {[["16+", "Projects"], ["15+", "Technologies"], ["Active", "Intern"]].map(([v, l]) => (
                 <div key={l} className="group">
                   <div
                     className="text-2xl font-black font-display grad group-hover:scale-110 transition-transform origin-left"
