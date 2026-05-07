@@ -40,6 +40,7 @@ const CATEGORIES: Category[] = [
       { name:"NLP",        badge:"NL",  color:"#8B5CF6", bg:"rgba(139,92,246,0.12)", level:82 },
       { name:"OpenCV",     badge:"CV",  color:"#5C9EBD", bg:"rgba(92,158,189,0.14)", level:74 },
       { name:"Scikit",     badge:"SK",  color:"#F97316", bg:"rgba(249,115,22,0.12)", level:76 },
+      { name:"PyTorch",    badge:"PT",  color:"#EE4C2C", bg:"rgba(238,76,44,0.12)",  level:80 },
     ],
   },
   {
@@ -52,6 +53,7 @@ const CATEGORIES: Category[] = [
       { name:"HTML",       badge:"</>", color:"#E34F26", bg:"rgba(227,79,38,0.12)",  level:90 },
       { name:"CSS",        badge:"✦",   color:"#1572B6", bg:"rgba(21,114,182,0.12)", level:85 },
       { name:"Flask",      badge:"Fl",  color:"#06B6D4", bg:"rgba(6,182,212,0.10)",  level:80 },
+      { name:"FastAPI",    badge:"FA",  color:"#009688", bg:"rgba(0,150,136,0.12)",  level:75 },
     ],
   },
   {
@@ -64,6 +66,7 @@ const CATEGORIES: Category[] = [
       { name:"Figma",      badge:"F",   color:"#A259FF", bg:"rgba(162,89,255,0.12)",  level:70 },
       { name:"Docker",     badge:"🐳",  color:"#2496ED", bg:"rgba(36,150,237,0.12)",  level:65 },
       { name:"Linux",      badge:"🐧",  color:"#FCC624", bg:"rgba(252,198,36,0.10)",  level:72 },
+      { name:"Selenium",   badge:"Se",  color:"#43B02A", bg:"rgba(67,176,42,0.12)",   level:78 },
     ],
   },
 ];

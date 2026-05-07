@@ -35,6 +35,12 @@ const PROJECTS: Project[] = [
   { id:14, title:"Network Performance Tester",  desc:"Measures network throughput, latency, and packet loss with comprehensive diagnostic reporting and visualization.",                 stack:["Python","Networking","Socket","Matplotlib"],        cat:"Systems", github:"https://github.com/pun33th45/network-performance-tester-application", icon:"📡", color:"#3B82F6"               },
   { id:15, title:"Channel Connectivity Tester", desc:"Automated network channel testing tool identifying bottlenecks and generating diagnostic reports for network engineers.",          stack:["Python","Networking","CLI","Diagnostics"],          cat:"Systems", github:"https://github.com/pun33th45/Channel-connectivity-tester",           icon:"🔗", color:"#8B5CF6"               },
   { id:16, title:"Park Matrix",                 desc:"Data-driven smart parking management tracking occupancy patterns and predicting availability through analytics.",                  stack:["Python","NumPy","Pandas","Data Analysis"],          cat:"Systems", github:"https://github.com/pun33th45/Park-Matrix",                           icon:"🗺️", color:"#06B6D4"               },
+  { id:17, title:"Autonomous Vehicle Detection", desc:"Real-time obstacle detection for autonomous vehicles using YOLOv8 with a Streamlit dashboard — live on HuggingFace Spaces.",      stack:["Python","YOLOv8","PyTorch","Streamlit","FastAPI","Computer Vision"], cat:"AI/ML",   github:"https://github.com/pun33th45/autonomous-vehicle-obstacle-detection-yolo", icon:"🚗", color:"#10B981", featured:true },
+  { id:18, title:"N8N Workflow Generator",        desc:"Generate production-ready n8n automation workflows from plain English descriptions using Google Gemini AI.",                       stack:["TypeScript","Google Gemini","n8n","AI Automation"],  cat:"AI/ML",   github:"https://github.com/pun33th45/n8n-workflow-generator",                     icon:"⚙️", color:"#F59E0B"               },
+  { id:19, title:"RAG Developer Assistant",       desc:"AI-powered RAG-based developer assistant — upload entire codebases or documents and interact using natural language queries.",    stack:["Python","RAG","LLM","LangChain","Vector DB"],         cat:"AI/ML",   github:"https://github.com/pun33th45/RAG-Based-Developer-Assistant",              icon:"🤖", color:"#8B5CF6"               },
+  { id:20, title:"Football Value Predictor",      desc:"ML model estimating football player transfer market values based on performance statistics and data-driven feature analysis.",    stack:["Python","Scikit-learn","Pandas","NumPy","ML"],        cat:"AI/ML",   github:"https://github.com/pun33th45/football-transfer-market-value-predictor",   icon:"⚽", color:"#3B82F6"               },
+  { id:21, title:"FinSight AI",                   desc:"AI-powered expense tracker that logs spending, sets budgets, and generates smart insights into personal financial habits.",        stack:["TypeScript","React","Next.js","AI","Finance"],        cat:"Web",     github:"https://github.com/pun33th45/finsight-ai",                               icon:"💰", color:"#06B6D4"               },
+  { id:22, title:"Selenium E-Commerce Framework", desc:"Industry-level Selenium Java automation framework for e-commerce — TestNG, Maven, Page Object Model, Log4j2, Extent Reports.",   stack:["Java","Selenium","TestNG","Maven","Log4j2"],          cat:"Systems", github:"https://github.com/pun33th45/selenium-ecommerce-framework",               icon:"🧪", color:"#F97316"               },
 ];
 
 function GithubIcon({ size = 13 }: { size?: number }) {
@@ -199,7 +205,7 @@ export default function Projects() {
             What I&apos;ve <span className="grad">Built</span>
           </h2>
           <p className="text-white/45 text-lg max-w-xl mx-auto">
-            16 real projects — AI/ML, web development, mobile, and systems engineering.
+            22 real projects — AI/ML, web development, mobile, and systems engineering.
           </p>
         </motion.div>
 
