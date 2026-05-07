@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://puneethraj.dev",
+    url: "https://puneeth-dev.vercel.app",
     title: "Puneeth Raj | AI Engineer & ML Developer",
     description:
       "Building intelligent systems that learn, adapt, and transform how humans interact with technology.",

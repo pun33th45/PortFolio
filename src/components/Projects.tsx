@@ -31,7 +31,7 @@ const PROJECTS: Project[] = [
   { id:10, title:"CompileX Beta",               desc:"Online multi-language code compilation platform with real-time execution, syntax highlighting, and shareable sessions.",           stack:["React","Node.js","Docker","TypeScript"],            cat:"Web",     github:"https://github.com/pun33th45/CompileX-BETA",                         icon:"🖥️", color:"#3B82F6", featured:true  },
   { id:11, title:"Web Dev Projects",            desc:"Collection of modern web projects demonstrating responsive design, CSS animations, and interactive UI patterns.",                  stack:["HTML","CSS","JavaScript"],                         cat:"Web",     github:"https://github.com/pun33th45/Web-dev-projects",                      icon:"🌊", color:"#06B6D4"               },
   { id:12, title:"Secret Coder",                desc:"Gamified coding challenge platform with progressive difficulty, leaderboards, and developer achievement system.",                  stack:["JavaScript","Node.js","MongoDB","Socket.io"],       cat:"Web",     github:"https://github.com/pun33th45/Secret-coder",                          icon:"🔐", color:"#8B5CF6"               },
-  { id:13, title:"ParkMate Android",            desc:"Smart parking Android app with real-time slot availability, GPS navigation to nearest spots, and booking management.",             stack:["Java","Android","Google Maps","Firebase"],          cat:"Mobile",  github:"https://github.com/pun33th45/ParkMate-android",                      icon:"🅿️", color:"#10B981", featured:true  },
+  { id:13, title:"ParkMate",                     desc:"Peer-to-peer smart parking platform for Hyderabad — weighted multi-criteria scoring algorithm, real-time slot booking, Gemini 2.0 Flash AI integration, ZXing QR verification, and Cashfree payment gateway. Built as final year capstone project.", stack:["Kotlin","Jetpack Compose","Supabase","PostgreSQL","Gemini 2.0","Cashfree","ZXing","Android"], cat:"Mobile",  github:"https://github.com/pun33th45/ParkMate-android",                      icon:"🅿️", color:"#10B981", featured:true  },
   { id:14, title:"Network Performance Tester",  desc:"Measures network throughput, latency, and packet loss with comprehensive diagnostic reporting and visualization.",                 stack:["Python","Networking","Socket","Matplotlib"],        cat:"Systems", github:"https://github.com/pun33th45/network-performance-tester-application", icon:"📡", color:"#3B82F6"               },
   { id:15, title:"Channel Connectivity Tester", desc:"Automated network channel testing tool identifying bottlenecks and generating diagnostic reports for network engineers.",          stack:["Python","Networking","CLI","Diagnostics"],          cat:"Systems", github:"https://github.com/pun33th45/Channel-connectivity-tester",           icon:"🔗", color:"#8B5CF6"               },
   { id:16, title:"Park Matrix",                 desc:"Data-driven smart parking management tracking occupancy patterns and predicting availability through analytics.",                  stack:["Python","NumPy","Pandas","Data Analysis"],          cat:"Systems", github:"https://github.com/pun33th45/Park-Matrix",                           icon:"🗺️", color:"#06B6D4"               },
@@ -112,11 +112,16 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
         {/* Header */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
-            <motion.span
-              animate={hov ? { scale: 1.15, rotate: [0, -5, 5, 0] } : { scale: 1, rotate: 0 }}
-              transition={{ duration: 0.4 }}
-              className="text-2xl"
-            >{p.icon}</motion.span>
+            <div
+              className="w-9 h-9 rounded-lg flex items-center justify-center font-bold font-mono text-sm flex-shrink-0"
+              style={{
+                background: `${p.color}18`,
+                color: p.color,
+                border: `1px solid ${p.color}35`,
+              }}
+            >
+              {p.title.charAt(0)}
+            </div>
             <div>
               <div className="flex items-center gap-1.5">
                 <h3 className="text-sm font-bold text-white leading-tight">{p.title}</h3>

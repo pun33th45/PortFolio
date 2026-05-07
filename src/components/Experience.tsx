@@ -173,7 +173,7 @@ export default function Experience() {
                         color: "#06B6D4",
                         border: "1px solid rgba(6,182,212,0.25)",
                       }}
-                    >Current</span>
+                    >2025 — Present</span>
                   </div>
                   <div className="text-sm font-mono" style={{ color: "rgba(6,182,212,0.8)" }}>
                     Terabeam Proxim Wireless Pvt. Ltd
@@ -189,10 +189,10 @@ export default function Experience() {
 
               <ul className="space-y-2.5 mb-6">
                 {[
-                  "Building and maintaining web applications using modern frontend technologies",
-                  "Collaborating with the engineering team on product features and UI components",
-                  "Implementing responsive UI and optimizing performance",
-                  "Working with REST APIs and integrating backend services",
+                  "Built and shipped responsive web application features using React and REST API integrations",
+                  "Collaborated directly with the engineering team to implement UI components and optimize frontend performance",
+                  "Integrated backend services and debugged cross-browser compatibility issues in production",
+                  "Contributed to real product features used by end users — not just internal tools",
                 ].map((r, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-white/55 text-sm">
                     <div
@@ -208,8 +208,8 @@ export default function Experience() {
               <div className="pt-5 border-t border-white/6">
                 <div className="text-[10px] font-mono text-white/25 mb-3 tracking-widest">ACTIVITIES</div>
                 {[
-                  { title: "Project Expo",  icon: "🏆", desc: "Presented innovative projects at college expo" },
-                  { title: "Zoho Workshop", icon: "🔧", desc: "Intensive tech workshop by Zoho" },
+                  { title: "Project Expo",  icon: "🏆", desc: "Presented ParkMate — a peer-to-peer smart parking platform — at college technical expo. Demonstrated live booking flow, AI scoring algorithm, and QR-based entry verification." },
+                  { title: "Zoho Workshop", icon: "🔧", desc: "Participated in an intensive hands-on tech workshop conducted by Zoho — covered product engineering, SaaS architecture, and real-world software development workflows." },
                 ].map((a, i) => (
                   <div key={i} className="flex items-center gap-3 mb-2.5">
                     <span className="text-base">{a.icon}</span>

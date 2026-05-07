@@ -1,13 +1,12 @@
 "use client";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { CheckCircle, Github, Linkedin, Mail, MessageSquare, Phone, Send } from "lucide-react";
+import { CheckCircle, Github, Linkedin, Mail, MessageSquare, Send } from "lucide-react";
 
 const SOCIALS = [
   { icon:Mail,     label:"Email",    value:"puneethraaaj@gmail.com",        href:"mailto:puneethraaaj@gmail.com",                        color:"#06B6D4" },
   { icon:Linkedin, label:"LinkedIn", value:"puneeth-raj-774506211",         href:"https://www.linkedin.com/in/puneeth-raj-774506211",    color:"#2563EB" },
   { icon:Github,   label:"GitHub",   value:"pun33th45",                     href:"https://github.com/pun33th45",                         color:"#8B5CF6" },
-  { icon:Phone,    label:"Phone",    value:"+91 9398971543",                href:"tel:+919398971543",                                    color:"#10B981" },
 ];
 
 export default function Contact() {
@@ -18,10 +17,23 @@ export default function Contact() {
   const [sending, setSending] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
-    e.preventDefault(); setSending(true);
-    await new Promise(r => setTimeout(r, 1400));
-    setSent(true); setSending(false);
-    setForm({ name:"", email:"", message:"" });
+    e.preventDefault();
+    setSending(true);
+    try {
+      const res = await fetch("https://formspree.io/f/mkoyzkgb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSent(true);
+        setForm({ name: "", email: "", message: "" });
+      }
+    } catch {
+      // silently allow retry
+    } finally {
+      setSending(false);
+    }
   };
 
   return (

@@ -199,7 +199,7 @@ export default function Hero() {
               transition={{ delay: 0.5 }}
               className="text-white/50 leading-relaxed mb-10 max-w-lg"
             >
-              Third-year B.Tech CS student specializing in{" "}
+              Final year B.Tech CS student specializing in{" "}
               <span style={{ color: "#06B6D4", fontWeight: 500 }}>AI & Machine Learning</span>{" "}
               at Sreyas Institute. Building production-ready AI systems that create real-world impact.
             </motion.p>
@@ -241,7 +241,7 @@ export default function Hero() {
               transition={{ delay: 0.75 }}
               className="flex gap-8 mb-8"
             >
-              {[["16+", "Projects"], ["15+", "Technologies"], ["Active", "Intern"]].map(([v, l]) => (
+              {[["22+", "Projects"], ["20+", "Technologies"], ["Active", "Intern"]].map(([v, l]) => (
                 <div key={l} className="group">
                   <div
                     className="text-2xl font-black font-display grad group-hover:scale-110 transition-transform origin-left"

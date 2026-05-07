@@ -6,35 +6,35 @@ import { Brain, Lightbulb, Wrench, Rocket, CheckCircle2, User } from "lucide-rea
 const FEATURES = [
   {
     icon:  Brain,
-    label: "AI & Machine Learning",
-    desc:  "Focused on developing intelligent systems and learning modern AI technologies.",
+    label: "AI Focus",
+    desc:  "Building production ML systems — NLP, computer vision, LLMs, RAG pipelines.",
     color: "#06B6D4",
   },
   {
     icon:  Lightbulb,
     label: "Problem Solving",
-    desc:  "Enjoy analyzing problems and designing efficient technical solutions.",
+    desc:  "Designed a weighted multi-criteria scoring algorithm for real-time parking allocation.",
     color: "#8B5CF6",
   },
   {
     icon:  Wrench,
     label: "Developer Mindset",
-    desc:  "Passionate about writing clean code and building useful tools.",
+    desc:  "22 projects shipped across AI, web, mobile, and systems engineering.",
     color: "#3B82F6",
   },
   {
     icon:  Rocket,
     label: "Continuous Learning",
-    desc:  "Constantly exploring new technologies and improving my technical skills.",
+    desc:  "Certified in Agentic AI (AgentAcademy), AI Foundations (Anthropic Skilljar).",
     color: "#10B981",
   },
 ];
 
 const HIGHLIGHTS = [
-  "AI & Machine Learning Focus",
-  "Building real-world developer tools",
-  "Strong interest in intelligent systems",
-  "Continuous learner exploring new technologies",
+  "Final year B.Tech CS, Sreyas Institute — AI & ML specialization",
+  "Capstone: ParkMate — peer-to-peer smart parking platform",
+  "Currently interning at Terabeam Proxim Wireless",
+  "Seeking full-time AI/ML or full-stack roles from mid-2025",
 ];
 
 function FeatureCard({ f, i }: { f: typeof FEATURES[0]; i: number }) {
@@ -142,11 +142,14 @@ export default function About() {
 
             {/* Intro paragraph */}
             <p className="text-white/65 leading-relaxed text-base mb-8">
-              I am a Computer Science student specializing in{" "}
-              <span style={{ color: "#06B6D4", fontWeight: 600 }}>Artificial Intelligence and Machine Learning</span>.
-              I enjoy building intelligent systems, experimenting with machine learning technologies, and creating
-              practical software solutions. My goal is to combine engineering with intelligent automation to build
-              tools that solve real-world problems.
+              Final year B.Tech Computer Science student at Sreyas Institute, specializing in{" "}
+              <span style={{ color: "#06B6D4", fontWeight: 600 }}>AI &amp; Machine Learning</span>.
+              I build production-ready intelligent systems — from Seq2Seq translators and RAG-based
+              developer assistants to a full Android parking platform that won my college capstone.
+              Currently interning at{" "}
+              <span style={{ color: "#06B6D4", fontWeight: 600 }}>Terabeam Proxim Wireless</span>,
+              building and shipping real web products. Looking for full-time roles in AI/ML engineering
+              or full-stack development starting mid-2025.
             </p>
 
             {/* Highlight bullets */}
