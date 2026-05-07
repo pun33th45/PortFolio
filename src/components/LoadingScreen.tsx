@@ -1,67 +1,61 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
-const STEPS = [
-  "Initializing Portfolio...",
-  "Loading AI Projects...",
-  "Rendering Interface...",
-  "Launching Developer Environment...",
+const LINES = [
+  { prefix: "$ ",  text: "init portfolio.exe",            delay: 0    },
+  { prefix: "> ",  text: "Loading AI modules...",          delay: 420  },
+  { prefix: "> ",  text: "Connecting to network...",       delay: 820  },
+  { prefix: "> ",  text: "Rendering interface...",         delay: 1200 },
+  { prefix: "✓ ", text: "System ready. Welcome, Human.",  delay: 1600 },
 ];
+const TOTAL_MS = 2500;
 
 export default function LoadingScreen() {
-  // `gone` = true removes the node from DOM entirely (after CSS fade finishes)
-  const [gone, setGone]     = useState(false);
-  const [stepIdx, setStepIdx] = useState(0);
+  const [gone,    setGone]    = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  const [visible, setVisible] = useState<number[]>([]);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  // Use a ref so interval callback always has the latest index without
-  // the closure going stale across Strict-Mode double-invocations.
-  const counterRef = useRef(0);
+  const dismiss = () => {
+    if (leaving || gone) return;
+    setLeaving(true);
+    timersRef.current.forEach(clearTimeout);
+    const t = setTimeout(() => {
+      setGone(true);
+      try { sessionStorage.setItem("loader-shown", "1"); } catch (_) { /* ignore */ }
+    }, 450);
+    timersRef.current = [t];
+  };
 
   useEffect(() => {
-    // Step cycling — every 480 ms
-    counterRef.current = 0;
-    const si = setInterval(() => {
-      counterRef.current += 1;
-      if (counterRef.current < STEPS.length) {
-        setStepIdx(counterRef.current);
-      } else {
-        clearInterval(si);
-      }
-    }, 480);
+    try {
+      if (sessionStorage.getItem("loader-shown")) { setGone(true); return; }
+    } catch (_) { /* ignore */ }
 
-    // Remove from DOM 400 ms after the CSS fade finishes
-    // CSS fade: delay 2.3s + duration 0.7s = 3.0s total → add 100ms buffer
-    const ht = setTimeout(() => setGone(true), 3100);
+    const ts: ReturnType<typeof setTimeout>[] = [];
+    LINES.forEach((_, i) => {
+      ts.push(setTimeout(() => setVisible(v => [...v, i]), LINES[i].delay));
+    });
+    ts.push(setTimeout(dismiss, TOTAL_MS));
+    timersRef.current = ts;
 
-    return () => {
-      clearInterval(si);
-      clearTimeout(ht);
-    };
+    return () => ts.forEach(clearTimeout);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (gone) return null;
 
   return (
-    /*
-      The exit is driven purely by the CSS animation in globals.css:
-        .loading-exit { animation: fade-out-load 0.7s ease 2.3s forwards; }
-      This is immune to React Strict Mode double-invoke because the browser
-      owns the CSS timeline — it starts when the element is painted and ends
-      after 3s regardless of what React does with effects.
-    */
     <div
-      className="loading-exit fixed inset-0 z-[99999] flex flex-col items-center justify-center overflow-hidden"
-      style={{ background: "#05050A" }}
+      style={{
+        position: "fixed", inset: 0, zIndex: 99999,
+        background: "#05050A",
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+        opacity:   leaving ? 0 : 1,
+        transform: leaving ? "translateY(-16px)" : "none",
+        transition: "opacity 0.45s ease, transform 0.45s ease",
+      }}
     >
-      {/* Ambient glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-3xl"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.08), rgba(6,182,212,0.06) 35%, transparent 70%)" }}
-        />
-      </div>
-
       {/* Corner brackets */}
       {[
         "top-8 left-8 border-t-2 border-l-2",
@@ -69,136 +63,119 @@ export default function LoadingScreen() {
         "bottom-8 left-8 border-b-2 border-l-2",
         "bottom-8 right-8 border-b-2 border-r-2",
       ].map((cls, i) => (
-        <div
-          key={i}
-          className={`absolute w-10 h-10 ${cls}`}
-          style={{ borderColor: "rgba(6,182,212,0.4)" }}
-        />
+        <div key={i} className={`absolute w-10 h-10 ${cls}`}
+          style={{ borderColor: "rgba(6,182,212,0.35)" }} />
       ))}
 
-      {/* Neural rings */}
-      <div className="relative mb-10">
-        {/* Outer ring */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          className="w-32 h-32 rounded-full"
-          style={{
-            border: "1.5px solid transparent",
-            background: "linear-gradient(#05050A,#05050A) padding-box, linear-gradient(135deg,#3B82F6,#06B6D4,#8B5CF6) border-box",
-          }}
-        />
-        {/* Middle ring */}
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-4 rounded-full"
-          style={{
-            border: "1.5px solid transparent",
-            background: "linear-gradient(#05050A,#05050A) padding-box, linear-gradient(225deg,#06B6D4,#8B5CF6) border-box",
-          }}
-        />
-        {/* Inner ring */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1.4, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-9 rounded-full"
-          style={{
-            border: "1px solid transparent",
-            background: "linear-gradient(#05050A,#05050A) padding-box, linear-gradient(90deg,#3B82F6aa,transparent 50%,#06B6D4aa) border-box",
-          }}
-        />
-        {/* Center orb */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            className="w-9 h-9 rounded-full"
-            style={{ background: "radial-gradient(circle,#06B6D4,#3B82F6 55%,#8B5CF6)" }}
-          />
+      {/* Terminal window */}
+      <div style={{
+        width: "min(500px, 90vw)",
+        background: "rgba(6,182,212,0.03)",
+        border: "1px solid rgba(6,182,212,0.22)",
+        borderRadius: "12px",
+        overflow: "hidden",
+        boxShadow: "0 0 60px rgba(6,182,212,0.08), 0 32px 80px rgba(0,0,0,0.5)",
+      }}>
+        {/* Title bar */}
+        <div style={{
+          padding: "10px 16px",
+          borderBottom: "1px solid rgba(6,182,212,0.12)",
+          display: "flex", alignItems: "center", gap: 8,
+          background: "rgba(6,182,212,0.05)",
+        }}>
+          {["#ff5f57","#febc2e","#28c840"].map((c, i) => (
+            <div key={i} style={{ width: 10, height: 10, borderRadius: "50%", background: c, opacity: 0.8 }} />
+          ))}
+          <span style={{
+            marginLeft: 8,
+            fontFamily: "JetBrains Mono,monospace",
+            fontSize: 11,
+            color: "rgba(6,182,212,0.55)",
+            letterSpacing: "0.05em",
+          }}>
+            portfolio.exe — bash
+          </span>
         </div>
-        {/* Orbital dots */}
-        {[0, 60, 120, 180, 240, 300].map((deg, i) => (
-          <motion.div
-            key={deg}
-            animate={{ opacity: [0.2, 1, 0.2] }}
-            transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.23 }}
-            className="absolute w-1.5 h-1.5 rounded-full"
-            style={{
-              top: "50%", left: "50%",
-              background: i % 2 === 0 ? "#06B6D4" : "#8B5CF6",
-              transform: `rotate(${deg}deg) translateX(60px) translateY(-50%)`,
-            }}
-          />
-        ))}
+
+        {/* Terminal body */}
+        <div style={{ padding: "20px 24px", fontFamily: "JetBrains Mono,monospace", fontSize: 13, minHeight: 172 }}>
+          {LINES.map((line, i) => (
+            <div key={i} style={{
+              display: "flex", gap: 8, marginBottom: 10,
+              opacity:   visible.includes(i) ? 1 : 0,
+              transform: visible.includes(i) ? "none" : "translateY(6px)",
+              transition: "opacity 0.3s ease, transform 0.3s ease",
+            }}>
+              <span style={{ color: line.prefix.includes("✓") ? "#10B981" : "#8B5CF6", flexShrink: 0 }}>
+                {line.prefix}
+              </span>
+              <span style={{ color: line.prefix.includes("✓") ? "#10B981" : "rgba(241,245,249,0.75)" }}>
+                {line.text}
+              </span>
+              {i === visible.length - 1 && visible.length < LINES.length && (
+                <span style={{
+                  display: "inline-block", width: 7, height: 14,
+                  background: "#06B6D4",
+                  animation: "blink-cursor 0.7s steps(1) infinite",
+                  flexShrink: 0,
+                }} />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Name — immediately visible, no opacity-0 initial */}
-      <h1
-        className="font-display font-black text-5xl mb-2 tracking-tight grad"
-        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+      {/* Name */}
+      <div style={{ marginTop: 28, textAlign: "center" }}>
+        <h1 style={{
+          fontFamily: "'Space Grotesk',sans-serif",
+          fontWeight: 900,
+          fontSize: "clamp(1.9rem,5vw,2.9rem)",
+          background: "linear-gradient(135deg,#06B6D4,#3B82F6,#8B5CF6)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+          marginBottom: 4,
+        }}>
+          Puneeth Raj
+        </h1>
+        <p style={{
+          fontFamily: "JetBrains Mono,monospace",
+          fontSize: 10,
+          color: "rgba(6,182,212,0.45)",
+          letterSpacing: "0.3em",
+        }}>
+          AI ENGINEER &amp; ML DEVELOPER
+        </p>
+      </div>
+
+      {/* Skip button */}
+      <button
+        onClick={dismiss}
+        style={{
+          position: "fixed", bottom: 28, right: 28,
+          padding: "6px 14px",
+          borderRadius: 8,
+          border: "1px solid rgba(6,182,212,0.22)",
+          background: "transparent",
+          color: "rgba(6,182,212,0.45)",
+          fontFamily: "JetBrains Mono,monospace",
+          fontSize: 11,
+          cursor: "pointer",
+          letterSpacing: "0.05em",
+          transition: "color .2s, border-color .2s",
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.color = "rgba(6,182,212,0.9)";
+          e.currentTarget.style.borderColor = "rgba(6,182,212,0.5)";
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.color = "rgba(6,182,212,0.45)";
+          e.currentTarget.style.borderColor = "rgba(6,182,212,0.22)";
+        }}
       >
-        Puneeth Raj
-      </h1>
-
-      <p
-        className="font-mono text-xs tracking-[0.3em] mb-8"
-        style={{ color: "rgba(6,182,212,0.6)", fontFamily: "'JetBrains Mono', monospace" }}
-      >
-        AI ENGINEER &amp; ML DEVELOPER
-      </p>
-
-      {/* Cycling step text — uses AnimatePresence just for text swap */}
-      <div className="h-6 flex items-center justify-center mb-5">
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={stepIdx}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.2 }}
-            className="font-mono text-sm flex items-center gap-2"
-            style={{ color: "#06B6D4", fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: "#06B6D4" }} />
-            {STEPS[stepIdx]}
-            <motion.span
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 0.7, repeat: Infinity }}
-              style={{ color: "#8B5CF6" }}
-            >
-              █
-            </motion.span>
-          </motion.p>
-        </AnimatePresence>
-      </div>
-
-      {/* Progress bar — CSS animation duration matches the step cycle */}
-      <div className="w-56 h-px rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
-        <div
-          className="h-full rounded-full"
-          style={{
-            background: "linear-gradient(90deg,#3B82F6,#06B6D4,#8B5CF6)",
-            animation: "grow-bar 2.1s ease forwards",
-          }}
-        />
-      </div>
-
-      {/* Step indicator pills */}
-      <div className="flex gap-2 mt-5">
-        {STEPS.map((_, i) => (
-          <div
-            key={i}
-            className="h-1 rounded-full transition-all duration-300"
-            style={{
-              width:      i === stepIdx ? 20 : 6,
-              background: i <= stepIdx
-                ? "linear-gradient(90deg,#06B6D4,#8B5CF6)"
-                : "rgba(255,255,255,0.1)",
-            }}
-          />
-        ))}
-      </div>
+        skip →
+      </button>
     </div>
   );
 }

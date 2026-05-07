@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState, Suspense } from "react";
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowDown, Linkedin, Mail, Sparkles, Terminal } from "lucide-react";
 
 function GithubIcon({ size = 17 }: { size?: number }) {
@@ -15,11 +15,40 @@ function GithubIcon({ size = 17 }: { size?: number }) {
 const Globe3D = dynamic(() => import("./Globe3D"), { ssr: false });
 
 const ROLES = [
+  "AI Engineer & ML Developer",
   "Building Intelligent Systems",
-  "Engineering AI Solutions",
-  "Creating Developer Tools",
-  "Full-Stack AI Developer",
+  "Final Year CS Student",
+  "Turning Ideas Into Products",
 ];
+
+function CountStat({ target, suffix, label }: { target: number; suffix: string; label: string }) {
+  const [count, setCount] = useState(0);
+  const ref    = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    const duration = 1200;
+    const start = Date.now();
+    const tick = () => {
+      const elapsed  = Date.now() - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased    = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [inView, target]);
+
+  return (
+    <div ref={ref} className="group">
+      <div className="text-2xl font-black font-display grad group-hover:scale-110 transition-transform origin-left">
+        {count}{suffix}
+      </div>
+      <div className="text-xs text-white/35 font-mono">{label}</div>
+    </div>
+  );
+}
 
 /* ── Floating code snippets data ── */
 const CODE_SNIPPETS = [
@@ -100,13 +129,13 @@ export default function Hero() {
 
   useEffect(() => {
     const role = ROLES[idx];
-    let t: NodeJS.Timeout;
+    let t: ReturnType<typeof setTimeout>;
     if (!del && txt.length < role.length)
-      t = setTimeout(() => setTxt(role.slice(0, txt.length + 1)), 50);
+      t = setTimeout(() => setTxt(role.slice(0, txt.length + 1)), 60);
     else if (!del && txt.length === role.length)
       t = setTimeout(() => setDel(true), 2400);
     else if (del && txt.length > 0)
-      t = setTimeout(() => setTxt(role.slice(0, txt.length - 1)), 25);
+      t = setTimeout(() => setTxt(role.slice(0, txt.length - 1)), 30);
     else { setDel(false); setIdx(i => (i + 1) % ROLES.length); }
     return () => clearTimeout(t);
   }, [txt, del, idx]);
@@ -158,9 +187,9 @@ export default function Hero() {
             >
               <div className="text-white/30 font-mono text-sm mb-3 tracking-widest">&lt; AI Engineer /&gt;</div>
               <h1 className="font-display font-black leading-none tracking-tight">
-                <span className="block text-white" style={{ fontSize: "clamp(3.5rem,8vw,7rem)" }}>Puneeth</span>
+                <span className="block text-white hero-glitch" style={{ fontSize: "clamp(3.5rem,8vw,7rem)" }}>Puneeth</span>
                 <span
-                  className="block pb-2"
+                  className="block pb-2 hero-glitch"
                   style={{
                     fontSize: "clamp(3.5rem,8vw,7rem)",
                     background: "linear-gradient(135deg, #06B6D4, #3B82F6, #8B5CF6)",
@@ -168,6 +197,7 @@ export default function Hero() {
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
                     filter: "drop-shadow(0 0 24px rgba(6,182,212,0.3))",
+                    animationDelay: "3.5s",
                   }}
                 >
                   Raj
@@ -241,14 +271,12 @@ export default function Hero() {
               transition={{ delay: 0.75 }}
               className="flex gap-8 mb-8"
             >
-              {[["22+", "Projects"], ["20+", "Technologies"], ["Active", "Intern"]].map(([v, l]) => (
-                <div key={l} className="group">
-                  <div
-                    className="text-2xl font-black font-display grad group-hover:scale-110 transition-transform origin-left"
-                  >{v}</div>
-                  <div className="text-xs text-white/35 font-mono">{l}</div>
-                </div>
-              ))}
+              <CountStat target={22} suffix="+" label="Projects" />
+              <CountStat target={20} suffix="+" label="Technologies" />
+              <div className="group">
+                <div className="text-2xl font-black font-display grad group-hover:scale-110 transition-transform origin-left">Active</div>
+                <div className="text-xs text-white/35 font-mono">Intern</div>
+              </div>
             </motion.div>
 
             {/* Socials */}

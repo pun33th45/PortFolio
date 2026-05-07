@@ -7,17 +7,21 @@ import Skills         from "@/components/Skills";
 import Experience     from "@/components/Experience";
 import Contact        from "@/components/Contact";
 import Quote          from "@/components/Quote";
-import ScrollProgress  from "@/components/ScrollProgress";
-import PremiumCursor   from "@/components/PremiumCursor";
-import ParticleNetwork from "@/components/ParticleNetwork";
-import LoadingScreen   from "@/components/LoadingScreen";
-import SectionDivider  from "@/components/SectionDivider";
+import ScrollProgress         from "@/components/ScrollProgress";
+import PremiumCursor          from "@/components/PremiumCursor";
+import ParticleNetwork        from "@/components/ParticleNetwork";
+import LoadingScreen          from "@/components/LoadingScreen";
+import SectionDivider         from "@/components/SectionDivider";
+import VerticalScrollProgress from "@/components/VerticalScrollProgress";
+import MatrixRain             from "@/components/MatrixRain";
 
 export default function Home() {
   return (
     <main style={{ background:"#05050A" }} className="min-h-screen relative overflow-x-hidden">
+      <MatrixRain />
       <LoadingScreen />
       <ScrollProgress />
+      <VerticalScrollProgress />
       <PremiumCursor />
       <ParticleNetwork />
       <Navigation />

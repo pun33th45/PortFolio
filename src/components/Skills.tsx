@@ -103,20 +103,27 @@ function TechCard({ tech, delay }: { tech: Tech; delay: number }) {
       />
 
       {/* Badge */}
-      <motion.div
-        animate={hov ? { scale: 1.1, rotate: [0, -3, 3, 0] } : { scale: 1, rotate: 0 }}
-        transition={{ duration: 0.3 }}
-        className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-mono flex-shrink-0"
-        style={{
-          background: tech.bg,
-          color: tech.color,
-          border: `1px solid ${tech.color}${hov ? "50" : "25"}`,
-          boxShadow: hov ? `0 0 10px ${tech.color}30` : "none",
-          transition: "border-color .2s, box-shadow .2s",
-        }}
-      >
-        {tech.badge}
-      </motion.div>
+      <div style={{
+        animation: `badge-pulse 3s ease-in-out infinite`,
+        animationDelay: `${delay * 2.5}s`,
+        borderRadius: "10px",
+      }}>
+        <motion.div
+          animate={hov ? { scale: 1.1, rotate: [0, -3, 3, 0] } : { scale: 1, rotate: 0 }}
+          transition={{ duration: 0.3 }}
+          className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-mono flex-shrink-0"
+          style={{
+            background: tech.bg,
+            color: tech.color,
+            border: `1px solid ${tech.color}${hov ? "50" : "25"}`,
+            boxShadow: hov ? `0 0 10px ${tech.color}30` : "none",
+            transition: "border-color .2s, box-shadow .2s",
+            "--badge-glow": `0 0 10px ${tech.color}50`,
+          } as React.CSSProperties}
+        >
+          {tech.badge}
+        </motion.div>
+      </div>
 
       {/* Name */}
       <span

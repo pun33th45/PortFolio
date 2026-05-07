@@ -53,15 +53,19 @@ function GithubIcon({ size = 13 }: { size?: number }) {
 
 function ProjectCard({ p, i }: { p: Project; i: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [hov, setHov]   = useState(false);
+  const [tilt,     setTilt]     = useState({ x: 0, y: 0 });
+  const [hov,      setHov]      = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
 
   const onMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
-    const r = cardRef.current.getBoundingClientRect();
+    const r  = cardRef.current.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width;
+    const ny = (e.clientY - r.top)  / r.height;
+    setMousePos({ x: nx, y: ny });
     setTilt({
-      x: -((e.clientY - r.top)  / r.height - 0.5) * 10,
-      y:  ((e.clientX - r.left) / r.width  - 0.5) * 10,
+      x: -(ny - 0.5) * 24,
+      y:  (nx - 0.5) * 24,
     });
   };
 
@@ -106,6 +110,21 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
             position: "absolute", top: 0, left: "10%", right: "10%", height: "1px",
             background: `linear-gradient(90deg, transparent, ${p.color}80, transparent)`,
             pointerEvents: "none",
+          }} />
+        )}
+
+        {/* Holographic rainbow sheen */}
+        {hov && (
+          <div style={{
+            position: "absolute", inset: 0, borderRadius: 16, pointerEvents: "none",
+            background: `radial-gradient(ellipse 140% 100% at ${mousePos.x * 100}% ${mousePos.y * 100}%,
+              rgba(255,80,140,0.055) 0%,
+              rgba(255,180,0,0.045) 22%,
+              rgba(0,240,200,0.055) 45%,
+              rgba(80,140,255,0.045) 68%,
+              transparent 100%)`,
+            mixBlendMode: "overlay",
+            transition: "background 0.08s ease",
           }} />
         )}
 
