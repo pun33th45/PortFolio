@@ -235,25 +235,57 @@ export default function Projects() {
 
         {/* Category filter */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
           className="flex flex-wrap justify-center gap-2 mb-12"
         >
           {CATS.map(c => {
             const active = cat === c.value;
+            const count  = c.value === "All"
+              ? PROJECTS.length
+              : PROJECTS.filter(p => p.cat === c.value).length;
             return (
               <button
                 key={c.value}
                 onClick={() => setCat(c.value)}
-                className="px-5 py-2 rounded-full text-sm font-mono transition-all duration-200"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-mono transition-all duration-250 relative overflow-hidden"
                 style={{
-                  background: active ? "rgba(6,182,212,0.15)"  : "rgba(255,255,255,0.04)",
-                  border:     active ? "1px solid rgba(6,182,212,0.5)" : "1px solid rgba(255,255,255,0.08)",
-                  color:      active ? "#06B6D4"               : "rgba(255,255,255,0.4)",
-                  boxShadow:  active ? "0 0 16px rgba(6,182,212,0.12)" : "none",
+                  background: active ? "rgba(6,182,212,0.18)" : "rgba(255,255,255,0.04)",
+                  border:     active ? "1px solid rgba(6,182,212,0.6)" : "1px solid rgba(255,255,255,0.08)",
+                  color:      active ? "#06B6D4" : "rgba(255,255,255,0.4)",
+                  boxShadow:  active ? "0 0 20px rgba(6,182,212,0.18), inset 0 0 20px rgba(6,182,212,0.04)" : "none",
+                  transform:  active ? "scale(1.06)" : "scale(1)",
+                  cursor: "pointer",
                 }}
-              >{c.label}</button>
+                onMouseEnter={e => {
+                  if (!active) {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.07)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (!active) {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.4)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                  }
+                }}
+              >
+                {c.label}
+                <span style={{
+                  fontSize: 10,
+                  padding: "1px 6px",
+                  borderRadius: 20,
+                  background: active ? "rgba(6,182,212,0.25)" : "rgba(255,255,255,0.07)",
+                  color: active ? "#06B6D4" : "rgba(255,255,255,0.3)",
+                  border: `1px solid ${active ? "rgba(6,182,212,0.35)" : "rgba(255,255,255,0.08)"}`,
+                  fontVariantNumeric: "tabular-nums",
+                }}>
+                  {count}
+                </span>
+              </button>
             );
           })}
         </motion.div>
@@ -262,10 +294,10 @@ export default function Projects() {
         <AnimatePresence mode="wait">
           <motion.div
             key={cat}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.28, ease: "easeOut" }}
             className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
           >
             {filtered.map((p, i) => <ProjectCard key={p.id} p={p} i={i} />)}
