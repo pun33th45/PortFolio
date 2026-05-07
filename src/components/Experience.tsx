@@ -153,7 +153,8 @@ export default function Experience() {
               className="glass rounded-2xl p-6 md:p-7 h-full"
               style={{ border: "1px solid rgba(6,182,212,0.2)" }}
             >
-              <div className="flex items-start gap-4 mb-5">
+              {/* Company header */}
+              <div className="flex items-start gap-4 mb-6">
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                   style={{
@@ -164,45 +165,84 @@ export default function Experience() {
                   <Globe size={20} style={{ color: "#06B6D4" }} />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-                    <h3 className="text-white font-bold text-base">Web Development Intern</h3>
-                    <span
-                      className="text-[10px] font-mono px-2 py-0.5 rounded-full"
-                      style={{
-                        background: "rgba(6,182,212,0.12)",
-                        color: "#06B6D4",
-                        border: "1px solid rgba(6,182,212,0.25)",
-                      }}
-                    >2025 — Present</span>
-                  </div>
+                  <h3 className="text-white font-bold text-base mb-0.5">Terabeam Proxim Wireless Pvt. Ltd</h3>
                   <div className="text-sm font-mono" style={{ color: "rgba(6,182,212,0.8)" }}>
-                    Terabeam Proxim Wireless Pvt. Ltd
+                    Oct 2025 — Present · 8 mos
                   </div>
-                  <div className="flex items-center gap-3 mt-1">
-                    <div className="flex items-center gap-1">
-                      <MapPin size={10} className="text-white/30" />
-                      <span className="text-white/30 text-xs">Hyderabad</span>
-                    </div>
+                  <div className="flex items-center gap-1 mt-1">
+                    <MapPin size={10} className="text-white/30" />
+                    <span className="text-white/30 text-xs">Hyderabad, India</span>
                   </div>
                 </div>
               </div>
 
-              <ul className="space-y-2.5 mb-6">
-                {[
-                  "Built and shipped responsive web application features using React and REST API integrations",
-                  "Collaborated directly with the engineering team to implement UI components and optimize frontend performance",
-                  "Integrated backend services and debugged cross-browser compatibility issues in production",
-                  "Contributed to real product features used by end users — not just internal tools",
-                ].map((r, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-white/55 text-sm">
+              {/* Roles timeline */}
+              <div className="relative mb-6">
+                <div
+                  className="absolute left-3 top-2 bottom-2 w-px"
+                  style={{ background: "rgba(6,182,212,0.2)" }}
+                />
+                <div className="space-y-5">
+
+                  {/* QA Intern (Automation) — current */}
+                  <div className="relative pl-10">
                     <div
-                      className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
-                      style={{ background: "rgba(6,182,212,0.6)" }}
+                      className="absolute top-[5px] w-3 h-3 rounded-full"
+                      style={{ left: "6px", background: "#06B6D4", boxShadow: "0 0 8px rgba(6,182,212,0.8)" }}
                     />
-                    {r}
-                  </li>
-                ))}
-              </ul>
+                    <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                      <span className="text-white font-semibold text-sm">QA Intern (Automation)</span>
+                      <span
+                        className="text-[10px] font-mono px-2 py-0.5 rounded-full"
+                        style={{
+                          background: "rgba(6,182,212,0.12)",
+                          color: "#06B6D4",
+                          border: "1px solid rgba(6,182,212,0.25)",
+                        }}
+                      >Current</span>
+                    </div>
+                    <div className="text-xs font-mono text-white/35 mb-2">Mar 2026 — Present · 3 mos</div>
+                    <ul className="space-y-1.5">
+                      {[
+                        "Developing automation tools to enhance test coverage and reduce manual effort",
+                        "Building and maintaining automated test suites using Selenium and Java",
+                        "Collaborating with the engineering team on QA processes and release validation",
+                      ].map((r, i) => (
+                        <li key={i} className="flex items-start gap-2 text-white/50 text-xs">
+                          <div className="w-1 h-1 rounded-full mt-1.5 shrink-0" style={{ background: "rgba(6,182,212,0.6)" }} />
+                          {r}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Web Development Intern */}
+                  <div className="relative pl-10">
+                    <div
+                      className="absolute top-[5px] w-3 h-3 rounded-full"
+                      style={{ left: "6px", background: "rgba(6,182,212,0.12)", border: "1px solid rgba(6,182,212,0.35)" }}
+                    />
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-white/80 font-semibold text-sm">Web Development Intern</span>
+                    </div>
+                    <div className="text-xs font-mono text-white/35 mb-2">Oct 2025 — Mar 2026 · 6 mos</div>
+                    <ul className="space-y-1.5">
+                      {[
+                        "Built and shipped responsive web application features using React and REST API integrations",
+                        "Collaborated directly with the engineering team to implement UI components and optimize frontend performance",
+                        "Integrated backend services and debugged cross-browser compatibility issues in production",
+                        "Contributed to real product features used by end users — not just internal tools",
+                      ].map((r, i) => (
+                        <li key={i} className="flex items-start gap-2 text-white/50 text-xs">
+                          <div className="w-1 h-1 rounded-full mt-1.5 shrink-0" style={{ background: "rgba(6,182,212,0.35)" }} />
+                          {r}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
 
               {/* Activities */}
               <div className="pt-5 border-t border-white/6">
