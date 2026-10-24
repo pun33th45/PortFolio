@@ -1,0 +1,11 @@
+/* globals.css hides the native cursor for the homepage's custom cursor,
+   which isn't mounted here — restore it for this page only. */
+.root,
+.root * {
+  cursor: auto !important;
+}
+
+.root a,
+.root a * {
+  cursor: pointer !important;
+}
