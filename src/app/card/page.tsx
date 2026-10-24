@@ -1,5 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { ArrowUpRight, AtSign, Github, Globe, Linkedin, MapPin, type LucideIcon } from "lucide-react";
+import {
+  ArrowUpRight,
+  AtSign,
+  Github,
+  Globe,
+  Linkedin,
+  MapPin,
+  Phone,
+  type LucideIcon,
+} from "lucide-react";
 import ProfilePhoto from "@/components/card/ProfilePhoto";
 import styles from "./card.module.css";
 
@@ -11,6 +20,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "https://puneeth-dev.vercel.app/card" },
+  formatDetection: { telephone: false },
   openGraph: {
     type: "profile",
     url: "https://puneeth-dev.vercel.app/card",
@@ -67,6 +77,13 @@ const LINKS: CardLink[] = [
     href: "mailto:puneethraaaj@gmail.com",
     external: false,
   },
+  {
+    icon: Phone,
+    label: "Phone",
+    description: "+91 93989 71543",
+    href: "tel:+919398971543",
+    external: false,
+  },
 ];
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -121,8 +138,8 @@ export default function CardPage() {
           <span aria-hidden="true" className={styles.rule} />
 
           <p className={`${styles.bio} ${styles.reveal}`} style={delay(220)}>
-            I build software, explore AI/ML, and turn ideas into useful products. Always learning,
-            experimenting, and building.
+            I turn ideas into software and curiosity into code. Exploring AI/ML, shipping side
+            projects, and learning something new with every build.
           </p>
 
           <p className={`${styles.location} ${styles.reveal}`} style={delay(260)}>

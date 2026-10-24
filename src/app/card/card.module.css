@@ -427,6 +427,72 @@
   }
 }
 
+/* Phones: tighter rhythm so the whole card fits in about one screen after an NFC tap. */
+@media (max-width: 639px) {
+  .root {
+    padding: 24px 16px calc(20px + env(safe-area-inset-bottom));
+  }
+
+  .photo {
+    width: 96px;
+    height: 96px;
+    padding: 3px;
+  }
+
+  .eyebrow {
+    margin-top: 16px;
+  }
+
+  .name {
+    margin-top: 8px;
+  }
+
+  .title {
+    margin-top: 6px;
+  }
+
+  .rule {
+    margin-top: 14px;
+  }
+
+  .bio {
+    margin-top: 14px;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  .location {
+    margin-top: 10px;
+  }
+
+  .links {
+    margin-top: 22px;
+  }
+
+  .sectionHead {
+    margin-bottom: 10px;
+  }
+
+  .list {
+    gap: 8px;
+  }
+
+  .card {
+    min-height: 60px;
+    padding: 9px 14px 9px 10px;
+    gap: 12px;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer {
+    margin-top: 22px;
+  }
+}
+
 @media (max-width: 359px) {
   .num {
     display: none;
